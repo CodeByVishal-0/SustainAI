@@ -57,13 +57,26 @@ Use professional formatting.
 
 def orchestrator(city, question):
 
-    weather_data = weather_agent(city)
+    try:
+        weather_data = weather_agent(city)
+    except Exception as e:
+        return f"Weather Agent Error: {e}"
 
-    news_data = news_agent(city)
+    try:
+        news_data = news_agent(city)
+    except Exception as e:
+        print(f"News Agent Error: {e}")
+        news_data = []
 
-    impact_data = impact_agent(weather_data)
+    try:
+        impact_data = impact_agent(weather_data)
+    except Exception as e:
+        return f"Impact Agent Error: {e}"
 
-    rag_response = answer_question(question)
+    try:
+        rag_response = answer_question(question)
+    except Exception as e:
+        return f"RAG Agent Error: {e}"
 
     report = generate_report(
         city,

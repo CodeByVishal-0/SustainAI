@@ -3,6 +3,11 @@ from utils.news_api import get_news
 
 def news_agent(city):
 
-    news = get_news(city)
+    try:
+        return get_news(city)
 
-    return news
+    except Exception as e:
+
+        print(f"News Agent Error: {e}")
+
+        return []
