@@ -19,3 +19,9 @@ def root():
     return {
         "message": "SustainAI API Running"
     }
+@app.get("/health")
+def health():
+
+    return {
+        "status": "healthy"
+    }

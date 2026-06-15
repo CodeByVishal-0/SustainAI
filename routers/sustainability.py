@@ -1,29 +1,25 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 
 from schemas.request_models import SustainabilityRequest
+from schemas.response_models import AnalyzeResponse
 
 from agents.orchestrator import orchestrator
 
 router = APIRouter()
 
 
-from fastapi import HTTPException
-
-
-@router.post("/analyze")
+@router.post(
+    "/analyze",
+    response_model=AnalyzeResponse
+)
 def analyze(request: SustainabilityRequest):
 
     try:
 
-        report = orchestrator(
+        return orchestrator(
             city=request.city,
             question=request.question
         )
-
-        return {
-            "status": "success",
-            "report": report
-        }
 
     except Exception as e:
 

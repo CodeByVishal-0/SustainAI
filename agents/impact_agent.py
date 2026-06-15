@@ -1,10 +1,12 @@
-def calculate_score(weather_data):
+def calculate_score(weather_data, news_data):
 
     score = 100
 
-    # AQI Impact
+    # Weather data
     aqi = weather_data["aqi"]
+    temp = weather_data["temperature"]
 
+    # AQI Impact
     if aqi == 5:
         score -= 40
     elif aqi == 4:
@@ -15,8 +17,6 @@ def calculate_score(weather_data):
         score -= 10
 
     # Temperature Impact
-    temp = weather_data["temperature"]
-
     if temp > 45:
         score -= 25
     elif temp > 40:
@@ -24,19 +24,41 @@ def calculate_score(weather_data):
     elif temp > 35:
         score -= 10
 
-    return max(score, 0)
+    # News Impact
+    news_titles = " ".join(
+        article["title"].lower()
+        for article in news_data
+    )
+
+    if "pollution" in news_titles:
+        score -= 10
+
+    if "air quality" in news_titles:
+        score -= 10
+
+    if "tree" in news_titles:
+        score += 5
+
+    if "renewable energy" in news_titles:
+        score += 5
+
+    return max(min(score, 100), 0)
+
+
 def get_risk_level(score):
 
     if score >= 80:
         return "Low"
 
-    if score >= 60:
+    elif score >= 60:
         return "Moderate"
 
-    if score >= 40:
+    elif score >= 40:
         return "High"
 
     return "Critical"
+
+
 def generate_recommendations(weather_data):
 
     recommendations = []
@@ -60,9 +82,14 @@ def generate_recommendations(weather_data):
     )
 
     return recommendations
-def impact_agent(weather_data):
 
-    score = calculate_score(weather_data)
+
+def impact_agent(weather_data, news_data):
+
+    score = calculate_score(
+        weather_data,
+        news_data
+    )
 
     return {
         "score": score,

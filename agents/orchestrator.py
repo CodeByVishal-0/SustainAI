@@ -69,7 +69,7 @@ def orchestrator(city, question):
         news_data = []
 
     try:
-        impact_data = impact_agent(weather_data)
+        impact_data = impact_agent(weather_data,news_data)
     except Exception as e:
         return f"Impact Agent Error: {e}"
 
@@ -79,11 +79,18 @@ def orchestrator(city, question):
         return f"RAG Agent Error: {e}"
 
     report = generate_report(
-        city,
-        weather_data,
-        news_data,
-        impact_data,
-        rag_response
-    )
+    city,
+    weather_data,
+    news_data,
+    impact_data,
+    rag_response
+)
 
-    return report
+    return {
+        "city": city,
+        "weather": weather_data,
+        "impact": impact_data,
+        "news": news_data,
+        "rag_insights": rag_response,
+        "report": report
+    }
