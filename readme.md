@@ -1,96 +1,111 @@
 # 🌱 SustainAI - Multi-Agent Sustainability Intelligence Platform
 
-SustainAI is an AI-powered sustainability analysis platform that combines Retrieval-Augmented Generation (RAG), real-time environmental data, news intelligence, and Large Language Models to generate sustainability reports for cities.
+## Overview
 
-The platform analyzes environmental conditions, sustainability knowledge, and current news to provide actionable recommendations aligned with the United Nations Sustainable Development Goals (SDGs).
+SustainAI is an AI-powered sustainability intelligence platform that combines Retrieval-Augmented Generation (RAG), real-time environmental data, weather intelligence, news monitoring, and AI-driven sustainability assessment to generate comprehensive sustainability reports aligned with the United Nations Sustainable Development Goals (SDGs).
 
----
-
-## 🚀 Features
-
-### 📚 RAG-Based Sustainability Knowledge Base
-
-* Loads sustainability and SDG documents
-* Generates embeddings using Hugging Face
-* Stores vectors in ChromaDB
-* Retrieves relevant sustainability insights
-
-### 🤖 AI-Powered Question Answering
-
-* Uses Groq Llama 3 for response generation
-* Answers sustainability-related questions using retrieved context
-
-### 🌦️ Weather Intelligence Agent
-
-* Fetches real-time weather data
-* Retrieves Air Quality Index (AQI)
-* Analyzes environmental conditions
-
-### 📰 News Intelligence Agent
-
-* Collects city-specific environmental news
-* Tracks pollution, climate, and sustainability-related developments
-
-### 📊 Sustainability Impact Agent
-
-* Calculates sustainability score
-* Determines environmental risk level
-* Generates sustainability recommendations
-
-### 🎯 Orchestrator Agent
-
-* Coordinates all agents
-* Combines:
-
-  * Weather Analysis
-  * AQI Analysis
-  * News Intelligence
-  * RAG Insights
-  * LLM Reasoning
-
-### ⚡ FastAPI Backend
-
-* REST API architecture
-* Swagger UI documentation
-* Structured JSON responses
+The platform leverages multiple specialized AI agents that work together to analyze environmental conditions, sustainability trends, and policy insights to provide actionable recommendations for cities and communities.
 
 ---
 
-## 🏗️ System Architecture
+## Features
 
-User Query
+### 🤖 Multi-Agent Architecture
 
-↓
+* Weather Intelligence Agent
+* Environmental News Agent
+* Sustainability Impact Agent
+* RAG Knowledge Agent
+* Report Generation Agent
+* Orchestrator Agent
 
-FastAPI Backend
+### 🌍 Sustainability Analysis
 
-↓
+* Real-time weather monitoring
+* Air Quality Index (AQI) assessment
+* Environmental news aggregation
+* Sustainability scoring
+* Risk-level prediction
+* SDG mapping and recommendations
 
-Orchestrator Agent
+### 📚 RAG-Powered Knowledge Base
 
-├── Weather Agent
+* ChromaDB Vector Database
+* HuggingFace Embeddings
+* Semantic Search
+* Sustainability Knowledge Retrieval
+* SDG-focused document analysis
 
-├── News Agent
+### 📊 Interactive Dashboard
 
-├── Impact Agent
-
-└── RAG Agent
-
-↓
-
-ChromaDB + HuggingFace Embeddings
-
-↓
-
-Groq Llama 3
-
-↓
-
-Sustainability Report
+* Sustainability Score Visualization
+* Environmental Conditions Monitoring
+* News Insights Dashboard
+* AI-generated Sustainability Reports
+* Responsive User Interface
 
 ---
 
-## 🛠️ Tech Stack
+## System Architecture
+
+```text
+                        ┌─────────────────┐
+                        │ React Frontend  │
+                        └────────┬────────┘
+                                 │
+                                 ▼
+                        ┌─────────────────┐
+                        │ FastAPI Backend │
+                        └────────┬────────┘
+                                 │
+          ┌──────────────────────┼──────────────────────┐
+          ▼                      ▼                      ▼
+
+ ┌───────────────┐      ┌───────────────┐      ┌───────────────┐
+ │ Weather Agent │      │ News Agent    │      │ Impact Agent  │
+ └───────┬───────┘      └───────┬───────┘      └───────┬───────┘
+         │                      │                      │
+         ▼                      ▼                      ▼
+
+ OpenWeather API         GNews API          Sustainability Scoring
+
+                                 │
+                                 ▼
+
+                      ┌────────────────────┐
+                      │ RAG Knowledge Agent│
+                      └─────────┬──────────┘
+                                │
+                                ▼
+
+                    ChromaDB + HuggingFace
+                          Embeddings
+
+                                │
+                                ▼
+
+                      ┌──────────────────┐
+                      │ Groq LLM Engine  │
+                      └─────────┬────────┘
+                                │
+                                ▼
+
+                   AI Sustainability Report
+```
+
+---
+
+## Tech Stack
+
+### Frontend
+
+* React.js
+* Vite
+* Tailwind CSS
+* Axios
+* React Markdown
+* React Circular Progressbar
+* React Spinners
 
 ### Backend
 
@@ -98,76 +113,143 @@ Sustainability Report
 * Python
 * Uvicorn
 
-### AI & LLM
+### AI & Machine Learning
 
-* Groq Llama 3
+* Groq LLM
+* HuggingFace Embeddings
 * LangChain
+* Retrieval-Augmented Generation (RAG)
 
 ### Vector Database
 
 * ChromaDB
 
-### Embeddings
-
-* HuggingFace Embeddings
-* all-MiniLM-L6-v2
-
 ### APIs
 
 * OpenWeather API
 * GNews API
+* Groq API
 
-### Data Processing
+### Knowledge Sources
 
-* PyPDFDirectoryLoader
-* RecursiveCharacterTextSplitter
+* Sustainable Development Goals (SDGs)
+* Environmental Guidelines
+* Sustainability Policies
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 ```text
-SustainAI/
+SustainAI
 │
 ├── agents/
-│   ├── rag_agent.py
 │   ├── weather_agent.py
 │   ├── news_agent.py
 │   ├── impact_agent.py
+│   ├── rag_agent.py
 │   └── orchestrator.py
-│
-├── utils/
-│   ├── embedding.py
-│   ├── vector_store.py
-│   ├── weather_api.py
-│   ├── news_api.py
-│   └── llm.py
-│
-├── schemas/
-│   ├── request_models.py
-│   └── response_models.py
 │
 ├── routers/
 │   └── sustainability.py
 │
+├── schemas/
+│   └── response_model.py
+│
+├── utils/
+│   ├── weather_api.py
+│   ├── news_api.py
+│   ├── llm.py
+│   └── loader.py
+│
 ├── data/
+│   ├── sdg_documents/
+│   ├── water_guidelines/
+│   ├── energy_guidelines/
+│   └── waste_policies/
 │
 ├── chroma_db/
 │
+├── sustainai-frontend/
+│   ├── src/
+│   ├── components/
+│   ├── services/
+│   └── public/
+│
 ├── main.py
 ├── ingest.py
-├── requirements.txt
-└── README.md
+└── requirements.txt
 ```
 
 ---
 
-## ⚙️ Installation
+## Sustainability Scoring Model
+
+The platform evaluates sustainability using:
+
+### Air Quality Assessment
+
+* AQI Level Analysis
+* Environmental Risk Identification
+
+### Climate Assessment
+
+* Temperature Monitoring
+* Humidity Analysis
+* Weather Impact Assessment
+
+### News Intelligence
+
+* Pollution Monitoring
+* Sustainability Initiatives
+* Environmental Policy Tracking
+
+### Risk Categories
+
+| Score    | Risk Level |
+| -------- | ---------- |
+| 80 - 100 | Low        |
+| 60 - 79  | Moderate   |
+| 40 - 59  | High       |
+| 0 - 39   | Critical   |
+
+---
+
+## Sample Output
+
+### Sustainability Score
+
+```text
+Score: 70
+Risk Level: Moderate
+```
+
+### Weather Analysis
+
+```text
+Temperature: 39.95°C
+Humidity: 21%
+AQI: 3
+Condition: Clear Sky
+```
+
+### Recommendations
+
+```text
+• Reduce outdoor activities during peak pollution hours.
+• Conserve electricity and avoid peak heat exposure.
+• Use public transportation whenever possible.
+• Practice water conservation.
+```
+
+---
+
+## Installation
 
 ### Clone Repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/SustainAI.git
+git clone https://github.com/CodeByVishal-0/SustainAI.git
 cd SustainAI
 ```
 
@@ -177,18 +259,10 @@ cd SustainAI
 python -m venv venv
 ```
 
-### Activate Virtual Environment
-
-Windows:
+### Activate Environment
 
 ```bash
 venv\Scripts\activate
-```
-
-Linux/Mac:
-
-```bash
-source venv/bin/activate
 ```
 
 ### Install Dependencies
@@ -197,43 +271,13 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
----
-
-## 🔑 Environment Variables
-
-Create a `.env` file:
-
-```env
-GROQ_API_KEY=your_groq_api_key
-OPENWEATHER_API_KEY=your_openweather_api_key
-GNEWS_API_KEY=your_gnews_api_key
-```
-
----
-
-## 📥 Load Documents
-
-Place sustainability PDFs inside:
-
-```text
-data/
-```
-
-Generate vector embeddings:
-
-```bash
-python ingest.py
-```
-
----
-
-## ▶️ Run FastAPI Server
+### Run Backend
 
 ```bash
 uvicorn main:app --reload
 ```
 
-Server:
+Backend:
 
 ```text
 http://127.0.0.1:8000
@@ -245,64 +289,85 @@ Swagger Docs:
 http://127.0.0.1:8000/docs
 ```
 
----
+### Run Frontend
 
-## 📌 API Endpoint
-
-### Analyze Sustainability
-
-```http
-POST /api/analyze
+```bash
+cd sustainai-frontend
+npm install
+npm run dev
 ```
 
-Request:
+Frontend:
 
-```json
-{
-  "city": "Mumbai",
-  "question": "How sustainable is Mumbai today?"
-}
-```
-
-Response:
-
-```json
-{
-  "city": "Mumbai",
-  "weather": {},
-  "impact": {},
-  "news": [],
-  "rag_insights": "...",
-  "report": "..."
-}
+```text
+http://localhost:5173
 ```
 
 ---
 
-## 🎯 Sustainable Development Goals (SDGs)
+## Screenshots
 
-Current knowledge base includes:
+### Dashboard
 
-* SDG 11 – Sustainable Cities and Communities
-* SDG 12 – Responsible Consumption and Production
-* SDG 13 – Climate Action
+![alt text](screenshots/image1.png)
+
+### Sustainability Score and Weather Information
+
+![alt text](screenshots/image2.png)
+
+### Environmental News
+
+![alt text](screenshots/image3.png)
+
+
+### Sustainability Report
+![alt text](screenshots/image4.png)
+
+### Swagger Documentation
+
+![alt text](screenshots/image5.png)
 
 ---
 
-## 🔮 Future Enhancements
+## Future Improvements
 
-* React + Tailwind Frontend
-* LangGraph Agent Workflow
-* Sustainability Dashboard
+* Deployment Optimization
+* Advanced Sustainability Metrics
 * Historical Trend Analysis
+* Interactive Data Visualizations
+* User Authentication
+* City Comparison Dashboard
+* ESG Reporting Module
 * Carbon Footprint Estimation
-* Multi-City Comparison
-* Deployment on Render & Vercel
 
 ---
 
-## 👨‍💻 Author
+## Learning Outcomes
 
-Vishal
+Through this project:
 
-Built as part of an AI for Sustainability initiative using Multi-Agent AI Systems, RAG, ChromaDB, FastAPI, and Groq.
+* Implemented Multi-Agent AI Architecture
+* Built Retrieval-Augmented Generation Pipeline
+* Integrated ChromaDB Vector Search
+* Developed FastAPI Backend APIs
+* Created React Dashboard UI
+* Used HuggingFace Embeddings
+* Integrated Real-time Environmental Data APIs
+* Generated AI-powered Sustainability Reports
+
+---
+
+## Author
+
+**Vishal Prajapati**
+
+B.Tech CSE (AI & ML)
+
+GitHub:
+https://github.com/CodeByVishal-0
+
+---
+
+## License
+
+This project is developed for educational and portfolio purposes.
